@@ -18,15 +18,5 @@ namespace CodeEditorWinForms
 
 			webBrowser1.DocumentText = htmlCode;
 		}
-
-		private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
-		{
-
-		}
-
-		private void label1_Click(object sender, EventArgs e)
-		{
-
-		}
 	}
 }

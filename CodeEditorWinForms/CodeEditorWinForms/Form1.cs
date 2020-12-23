@@ -15,9 +15,72 @@ namespace CodeEditorWinForms
 {
 	public partial class Form1 : Form
 	{
+
+		ToolStripMenuItem currentLanguage;
+
+		Dictionary<string, FastColoredTextBoxNS.Language> languages =
+				new Dictionary<string, FastColoredTextBoxNS.Language>
+				{
+					{"C#", FastColoredTextBoxNS.Language.CSharp},
+					{"VB", FastColoredTextBoxNS.Language.VB},
+					{"HTML", FastColoredTextBoxNS.Language.HTML},
+					{"XML", FastColoredTextBoxNS.Language.XML},
+					{"JS", FastColoredTextBoxNS.Language.JS},
+					{"PHP", FastColoredTextBoxNS.Language.PHP},
+					{"LUA", FastColoredTextBoxNS.Language.Lua},
+					{"SQL", FastColoredTextBoxNS.Language.SQL},
+				};
+
 		public Form1()
 		{
 			InitializeComponent();
+
+			Init();
+
+			InitFileExplorer();
+		}
+
+		private void InitFileExplorer()
+		{
+			PopulateTreeView();
+		}
+
+		private void PopulateTreeView()
+		{
+			TreeNode rootNode;
+
+			DirectoryInfo info = new DirectoryInfo(@"C:\Users\Rin\Desktop\AutoCorrect");
+			if (info.Exists)
+			{
+				rootNode = new TreeNode(info.Name);
+				rootNode.Tag = info;
+				GetDirectories(info.GetDirectories(), rootNode);
+				treeView1.Nodes.Add(rootNode);
+			}
+		}
+
+		private void GetDirectories(DirectoryInfo[] subDirs, TreeNode nodeToAddTo)
+		{
+			TreeNode aNode;
+			DirectoryInfo[] subSubDirs;
+			foreach (DirectoryInfo subDir in subDirs)
+			{
+				aNode = new TreeNode(subDir.Name, 0, 0);
+				aNode.Tag = subDir;
+				aNode.ImageKey = "folder";
+				subSubDirs = subDir.GetDirectories();
+				if (subSubDirs.Length != 0)
+				{
+					GetDirectories(subSubDirs, aNode);
+				}
+				nodeToAddTo.Nodes.Add(aNode);
+			}
+		}
+
+		private void Init()
+		{
+			currentLanguage = cToolStripMenuItem;
+			SelectLanguage(currentLanguage);
 		}
 
 		private void newToolStripMenuItem_Click(object sender, EventArgs e)
@@ -102,7 +165,7 @@ namespace CodeEditorWinForms
 		{
 			ColorDialog colorDialog = new ColorDialog();
 
-			if(colorDialog.ShowDialog() == DialogResult.OK)
+			if (colorDialog.ShowDialog() == DialogResult.OK)
 			{
 				codeEditor.BackColor = colorDialog.Color;
 			}
@@ -163,49 +226,60 @@ namespace CodeEditorWinForms
 			codeEditor.ShowReplaceDialog();
 		}
 
+		private void SelectLanguage(object sender)
+		{
+			currentLanguage.Checked = false;
+			currentLanguage = ((ToolStripMenuItem)sender);
+			currentLanguage.Checked = true;
+
+			codeEditor.Language = languages[currentLanguage.Text];
+
+			codeEditor.Refresh();
+		}
+
 		private void cToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			codeEditor.Language = FastColoredTextBoxNS.Language.CSharp;
+			SelectLanguage(sender);
 		}
 
 		private void vBToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			codeEditor.Language = FastColoredTextBoxNS.Language.VB;
+			SelectLanguage(sender);
 		}
 
 		private void hTMLToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			codeEditor.Language = FastColoredTextBoxNS.Language.HTML;
+			SelectLanguage(sender);
 		}
 
 		private void pHPToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			codeEditor.Language = FastColoredTextBoxNS.Language.PHP;
+			SelectLanguage(sender);
 		}
 
 		private void jSToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			codeEditor.Language = FastColoredTextBoxNS.Language.JS;
+			SelectLanguage(sender);
 		}
 
 		private void sQLToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			codeEditor.Language = FastColoredTextBoxNS.Language.SQL;
+			SelectLanguage(sender);
 		}
 
 		private void lUAToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			codeEditor.Language = FastColoredTextBoxNS.Language.Lua;
+			SelectLanguage(sender);
 		}
 
 		private void xMLToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			codeEditor.Language = FastColoredTextBoxNS.Language.XML;
+			SelectLanguage(sender);
 		}
 
 		private void runHTMLToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			if(codeEditor.Language == FastColoredTextBoxNS.Language.HTML)
+			if (codeEditor.Language == FastColoredTextBoxNS.Language.HTML)
 			{
 				HTMLPreview preview = new HTMLPreview(codeEditor.Text);
 				preview.Show();
@@ -259,6 +333,21 @@ namespace CodeEditorWinForms
 				//run compiled app
 				System.Diagnostics.Process.Start(OutPath);
 			}
+
+		}
+
+		private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+		{
+
+		}
+
+		private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
+		{
+
+		}
+
+		private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
+		{
 
 		}
 	}

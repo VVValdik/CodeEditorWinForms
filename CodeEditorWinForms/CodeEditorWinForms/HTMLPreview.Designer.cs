@@ -40,7 +40,6 @@
 			this.label1.Size = new System.Drawing.Size(45, 13);
 			this.label1.TabIndex = 0;
 			this.label1.Text = "Preview";
-			this.label1.Click += new System.EventHandler(this.label1_Click);
 			// 
 			// webBrowser1
 			// 
@@ -49,7 +48,6 @@
 			this.webBrowser1.Name = "webBrowser1";
 			this.webBrowser1.Size = new System.Drawing.Size(785, 422);
 			this.webBrowser1.TabIndex = 1;
-			this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted);
 			// 
 			// HTMLPreview
 			// 
