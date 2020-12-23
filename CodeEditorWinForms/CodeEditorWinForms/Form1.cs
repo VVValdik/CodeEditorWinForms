@@ -20,7 +20,7 @@ namespace CodeEditorWinForms
 
 		private void newToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			richTextBox1.Text = "";
+			codeEditor.Text = "";
 		}
 
 		private void OpenFileDialog()
@@ -33,7 +33,7 @@ namespace CodeEditorWinForms
 			{
 				StreamReader streamReader = new StreamReader(openFileDialog.FileName);
 
-				richTextBox1.Text = streamReader.ReadToEnd();
+				codeEditor.Text = streamReader.ReadToEnd();
 
 				streamReader.Close();
 
@@ -51,7 +51,7 @@ namespace CodeEditorWinForms
 			try
 			{
 				StreamWriter streamWriter = new StreamWriter(this.Text);
-				streamWriter.Write(richTextBox1.Text);
+				streamWriter.Write(codeEditor.Text);
 				streamWriter.Close();
 			}
 			catch
@@ -70,7 +70,7 @@ namespace CodeEditorWinForms
 			{
 				StreamWriter streamWriter = new StreamWriter(saveFileDialog.FileName);
 
-				streamWriter.Write(richTextBox1.Text);
+				streamWriter.Write(codeEditor.Text);
 
 				streamWriter.Close();
 			}
@@ -83,17 +83,17 @@ namespace CodeEditorWinForms
 
 		private void cutToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			richTextBox1.Cut();
+			codeEditor.Cut();
 		}
 
 		private void copyToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			richTextBox1.Copy();
+			codeEditor.Copy();
 		}
 
 		private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			richTextBox1.Paste();
+			codeEditor.Paste();
 		}
 
 		private void backgroundColorToolStripMenuItem_Click(object sender, EventArgs e)
@@ -102,7 +102,7 @@ namespace CodeEditorWinForms
 
 			if(colorDialog.ShowDialog() == DialogResult.OK)
 			{
-				richTextBox1.BackColor = colorDialog.Color;
+				codeEditor.BackColor = colorDialog.Color;
 			}
 		}
 
@@ -112,8 +112,93 @@ namespace CodeEditorWinForms
 
 			if (colorDialog.ShowDialog() == DialogResult.OK)
 			{
-				richTextBox1.ForeColor = colorDialog.Color;
+				codeEditor.ForeColor = colorDialog.Color;
 			}
+		}
+
+		private void undoToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			codeEditor.Undo();
+		}
+
+		private void redoToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			codeEditor.Redo();
+		}
+
+		private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			codeEditor.SelectAll();
+		}
+
+		private void cutToolStripMenuItem1_Click(object sender, EventArgs e)
+		{
+			codeEditor.Cut();
+		}
+
+		private void copyToolStripMenuItem1_Click(object sender, EventArgs e)
+		{
+			codeEditor.Copy();
+		}
+
+		private void pasteToolStripMenuItem1_Click(object sender, EventArgs e)
+		{
+			codeEditor.Paste();
+		}
+
+		private void findToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			codeEditor.ShowFindDialog();
+		}
+
+		private void goToToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			codeEditor.ShowGoToDialog();
+		}
+
+		private void replaceToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			codeEditor.ShowReplaceDialog();
+		}
+
+		private void cToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			codeEditor.Language = FastColoredTextBoxNS.Language.CSharp;
+		}
+
+		private void vBToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			codeEditor.Language = FastColoredTextBoxNS.Language.VB;
+		}
+
+		private void hTMLToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			codeEditor.Language = FastColoredTextBoxNS.Language.HTML;
+		}
+
+		private void pHPToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			codeEditor.Language = FastColoredTextBoxNS.Language.PHP;
+		}
+
+		private void jSToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			codeEditor.Language = FastColoredTextBoxNS.Language.JS;
+		}
+
+		private void sQLToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			codeEditor.Language = FastColoredTextBoxNS.Language.SQL;
+		}
+
+		private void lUAToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			codeEditor.Language = FastColoredTextBoxNS.Language.Lua;
+		}
+
+		private void xMLToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			codeEditor.Language = FastColoredTextBoxNS.Language.XML;
 		}
 	}
 }
