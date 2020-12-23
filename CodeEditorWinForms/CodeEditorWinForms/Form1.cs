@@ -42,38 +42,31 @@ namespace CodeEditorWinForms
 
 		private void InitFileExplorer()
 		{
-			PopulateTreeView();
+			PopulateTreeView(@"C:\Users\Rin\Desktop\AutoCorrect");
 		}
 
-		private void PopulateTreeView()
+		private void PopulateTreeView(string path)
 		{
-			TreeNode rootNode;
+			treeView1.Nodes.Clear();
 
-			DirectoryInfo info = new DirectoryInfo(@"C:\Users\Rin\Desktop\AutoCorrect");
-			if (info.Exists)
+			DirectoryInfo directoryInfo = new DirectoryInfo(path);
+			if (directoryInfo.Exists)
 			{
-				rootNode = new TreeNode(info.Name);
-				rootNode.Tag = info;
-				GetDirectories(info.GetDirectories(), rootNode);
-				treeView1.Nodes.Add(rootNode);
+				BuildTree(directoryInfo, treeView1.Nodes);
 			}
 		}
 
-		private void GetDirectories(DirectoryInfo[] subDirs, TreeNode nodeToAddTo)
+		private void BuildTree(DirectoryInfo directoryInfo, TreeNodeCollection addInMe)
 		{
-			TreeNode aNode;
-			DirectoryInfo[] subSubDirs;
-			foreach (DirectoryInfo subDir in subDirs)
+			TreeNode curNode = addInMe.Add(directoryInfo.Name);
+
+			foreach (FileInfo file in directoryInfo.GetFiles())
 			{
-				aNode = new TreeNode(subDir.Name, 0, 0);
-				aNode.Tag = subDir;
-				aNode.ImageKey = "folder";
-				subSubDirs = subDir.GetDirectories();
-				if (subSubDirs.Length != 0)
-				{
-					GetDirectories(subSubDirs, aNode);
-				}
-				nodeToAddTo.Nodes.Add(aNode);
+				curNode.Nodes.Add(file.FullName, file.Name);
+			}
+			foreach (DirectoryInfo subdir in directoryInfo.GetDirectories())
+			{
+				BuildTree(subdir, curNode.Nodes);
 			}
 		}
 
@@ -336,19 +329,23 @@ namespace CodeEditorWinForms
 
 		}
 
-		private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+		void treeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
 		{
-
+			TreeView treeView = (TreeView)sender;
+			if (treeView.SelectedNode.GetNodeCount(true) == 0)
+			{
+				MessageBox.Show(treeView.SelectedNode.FullPath);
+			}
 		}
 
-		private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
+		private void openProjectFolderToolStripMenuItem_Click_1(object sender, EventArgs e)
 		{
+			FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
 
-		}
-
-		private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
-		{
-
+			if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+			{
+				PopulateTreeView(folderBrowserDialog.SelectedPath);
+			}
 		}
 	}
 }

@@ -18,10 +18,8 @@
 				components.Dispose();
 			}
 			base.Dispose(disposing);
+			#region Код, автоматически созданный конструктором форм Windows
 		}
-
-		#region Код, автоматически созданный конструктором форм Windows
-
 		/// <summary>
 		/// Требуемый метод для поддержки конструктора — не изменяйте 
 		/// содержимое этого метода с помощью редактора кода.
@@ -58,18 +56,19 @@
 			this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.backgroundColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.textColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.runHTMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.runCShaprCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.settingsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.cutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.copyToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.pasteToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-			this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.runHTMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.runCShaprCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.settingsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.codeEditor = new FastColoredTextBoxNS.FastColoredTextBox();
 			this.treeView1 = new System.Windows.Forms.TreeView();
+			this.openProjectFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
 			this.contextMenuStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -101,7 +100,8 @@
             this.openToolStripMenuItem,
             this.saveToolStripMenuItem,
             this.saveAsToolStripMenuItem,
-            this.exitToolStripMenuItem});
+            this.exitToolStripMenuItem,
+            this.openProjectFolderToolStripMenuItem});
 			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
 			this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
 			this.fileToolStripMenuItem.Text = "File";
@@ -240,56 +240,56 @@
 			// cToolStripMenuItem
 			// 
 			this.cToolStripMenuItem.Name = "cToolStripMenuItem";
-			this.cToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.cToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
 			this.cToolStripMenuItem.Text = "C#";
 			this.cToolStripMenuItem.Click += new System.EventHandler(this.cToolStripMenuItem_Click);
 			// 
 			// vBToolStripMenuItem
 			// 
 			this.vBToolStripMenuItem.Name = "vBToolStripMenuItem";
-			this.vBToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.vBToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
 			this.vBToolStripMenuItem.Text = "VB";
 			this.vBToolStripMenuItem.Click += new System.EventHandler(this.vBToolStripMenuItem_Click);
 			// 
 			// hTMLToolStripMenuItem
 			// 
 			this.hTMLToolStripMenuItem.Name = "hTMLToolStripMenuItem";
-			this.hTMLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.hTMLToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
 			this.hTMLToolStripMenuItem.Text = "HTML";
 			this.hTMLToolStripMenuItem.Click += new System.EventHandler(this.hTMLToolStripMenuItem_Click);
 			// 
 			// pHPToolStripMenuItem
 			// 
 			this.pHPToolStripMenuItem.Name = "pHPToolStripMenuItem";
-			this.pHPToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.pHPToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
 			this.pHPToolStripMenuItem.Text = "PHP";
 			this.pHPToolStripMenuItem.Click += new System.EventHandler(this.pHPToolStripMenuItem_Click);
 			// 
 			// jSToolStripMenuItem
 			// 
 			this.jSToolStripMenuItem.Name = "jSToolStripMenuItem";
-			this.jSToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.jSToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
 			this.jSToolStripMenuItem.Text = "JS";
 			this.jSToolStripMenuItem.Click += new System.EventHandler(this.jSToolStripMenuItem_Click);
 			// 
 			// sQLToolStripMenuItem
 			// 
 			this.sQLToolStripMenuItem.Name = "sQLToolStripMenuItem";
-			this.sQLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.sQLToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
 			this.sQLToolStripMenuItem.Text = "SQL";
 			this.sQLToolStripMenuItem.Click += new System.EventHandler(this.sQLToolStripMenuItem_Click);
 			// 
 			// lUAToolStripMenuItem
 			// 
 			this.lUAToolStripMenuItem.Name = "lUAToolStripMenuItem";
-			this.lUAToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.lUAToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
 			this.lUAToolStripMenuItem.Text = "LUA";
 			this.lUAToolStripMenuItem.Click += new System.EventHandler(this.lUAToolStripMenuItem_Click);
 			// 
 			// xMLToolStripMenuItem
 			// 
 			this.xMLToolStripMenuItem.Name = "xMLToolStripMenuItem";
-			this.xMLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.xMLToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
 			this.xMLToolStripMenuItem.Text = "XML";
 			this.xMLToolStripMenuItem.Click += new System.EventHandler(this.xMLToolStripMenuItem_Click);
 			// 
@@ -305,16 +305,45 @@
 			// backgroundColorToolStripMenuItem
 			// 
 			this.backgroundColorToolStripMenuItem.Name = "backgroundColorToolStripMenuItem";
-			this.backgroundColorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.backgroundColorToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
 			this.backgroundColorToolStripMenuItem.Text = "Background color";
 			this.backgroundColorToolStripMenuItem.Click += new System.EventHandler(this.backgroundColorToolStripMenuItem_Click);
 			// 
 			// textColorToolStripMenuItem
 			// 
 			this.textColorToolStripMenuItem.Name = "textColorToolStripMenuItem";
-			this.textColorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.textColorToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
 			this.textColorToolStripMenuItem.Text = "Text color";
 			this.textColorToolStripMenuItem.Click += new System.EventHandler(this.textColorToolStripMenuItem_Click);
+			// 
+			// runToolStripMenuItem
+			// 
+			this.runToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.runHTMLToolStripMenuItem,
+            this.runCShaprCodeToolStripMenuItem});
+			this.runToolStripMenuItem.Name = "runToolStripMenuItem";
+			this.runToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
+			this.runToolStripMenuItem.Text = "Run";
+			// 
+			// runHTMLToolStripMenuItem
+			// 
+			this.runHTMLToolStripMenuItem.Name = "runHTMLToolStripMenuItem";
+			this.runHTMLToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+			this.runHTMLToolStripMenuItem.Text = "Run HTML";
+			this.runHTMLToolStripMenuItem.Click += new System.EventHandler(this.runHTMLToolStripMenuItem_Click);
+			// 
+			// runCShaprCodeToolStripMenuItem
+			// 
+			this.runCShaprCodeToolStripMenuItem.Name = "runCShaprCodeToolStripMenuItem";
+			this.runCShaprCodeToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+			this.runCShaprCodeToolStripMenuItem.Text = "Run CShapr code";
+			this.runCShaprCodeToolStripMenuItem.Click += new System.EventHandler(this.runCShaprCodeToolStripMenuItem_Click);
+			// 
+			// settingsToolStripMenuItem1
+			// 
+			this.settingsToolStripMenuItem1.Name = "settingsToolStripMenuItem1";
+			this.settingsToolStripMenuItem1.Size = new System.Drawing.Size(61, 20);
+			this.settingsToolStripMenuItem1.Text = "Settings";
 			// 
 			// contextMenuStrip1
 			// 
@@ -354,35 +383,6 @@
 			this.pasteToolStripMenuItem1.Text = "Paste";
 			this.pasteToolStripMenuItem1.Click += new System.EventHandler(this.pasteToolStripMenuItem1_Click);
 			// 
-			// runToolStripMenuItem
-			// 
-			this.runToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.runHTMLToolStripMenuItem,
-            this.runCShaprCodeToolStripMenuItem});
-			this.runToolStripMenuItem.Name = "runToolStripMenuItem";
-			this.runToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
-			this.runToolStripMenuItem.Text = "Run";
-			// 
-			// runHTMLToolStripMenuItem
-			// 
-			this.runHTMLToolStripMenuItem.Name = "runHTMLToolStripMenuItem";
-			this.runHTMLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-			this.runHTMLToolStripMenuItem.Text = "Run HTML";
-			this.runHTMLToolStripMenuItem.Click += new System.EventHandler(this.runHTMLToolStripMenuItem_Click);
-			// 
-			// runCShaprCodeToolStripMenuItem
-			// 
-			this.runCShaprCodeToolStripMenuItem.Name = "runCShaprCodeToolStripMenuItem";
-			this.runCShaprCodeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-			this.runCShaprCodeToolStripMenuItem.Text = "Run CShapr code";
-			this.runCShaprCodeToolStripMenuItem.Click += new System.EventHandler(this.runCShaprCodeToolStripMenuItem_Click);
-			// 
-			// settingsToolStripMenuItem1
-			// 
-			this.settingsToolStripMenuItem1.Name = "settingsToolStripMenuItem1";
-			this.settingsToolStripMenuItem1.Size = new System.Drawing.Size(61, 20);
-			this.settingsToolStripMenuItem1.Text = "Settings";
-			// 
 			// splitContainer1
 			// 
 			this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -392,12 +392,10 @@
 			// splitContainer1.Panel1
 			// 
 			this.splitContainer1.Panel1.Controls.Add(this.codeEditor);
-			this.splitContainer1.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel1_Paint);
 			// 
 			// splitContainer1.Panel2
 			// 
 			this.splitContainer1.Panel2.Controls.Add(this.treeView1);
-			this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
 			this.splitContainer1.Size = new System.Drawing.Size(800, 426);
 			this.splitContainer1.SplitterDistance = 629;
 			this.splitContainer1.TabIndex = 4;
@@ -422,7 +420,6 @@
 			this.codeEditor.Cursor = System.Windows.Forms.Cursors.IBeam;
 			this.codeEditor.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
 			this.codeEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.codeEditor.Font = new System.Drawing.Font("Courier New", 9.75F);
 			this.codeEditor.IsReplaceMode = false;
 			this.codeEditor.Location = new System.Drawing.Point(0, 0);
 			this.codeEditor.Name = "codeEditor";
@@ -441,6 +438,14 @@
 			this.treeView1.Name = "treeView1";
 			this.treeView1.Size = new System.Drawing.Size(167, 426);
 			this.treeView1.TabIndex = 0;
+			this.treeView1.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
+			// 
+			// openProjectFolderToolStripMenuItem
+			// 
+			this.openProjectFolderToolStripMenuItem.Name = "openProjectFolderToolStripMenuItem";
+			this.openProjectFolderToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+			this.openProjectFolderToolStripMenuItem.Text = "Open project folder";
+			this.openProjectFolderToolStripMenuItem.Click += new System.EventHandler(this.openProjectFolderToolStripMenuItem_Click_1);
 			// 
 			// Form1
 			// 
@@ -507,6 +512,7 @@
 		private System.Windows.Forms.SplitContainer splitContainer1;
 		private FastColoredTextBoxNS.FastColoredTextBox codeEditor;
 		private System.Windows.Forms.TreeView treeView1;
+		private System.Windows.Forms.ToolStripMenuItem openProjectFolderToolStripMenuItem;
 	}
 }
 
