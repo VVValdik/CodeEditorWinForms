@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.CodeDom.Compiler;
+using Microsoft.CSharp;
 
 namespace CodeEditorWinForms
 {
@@ -199,6 +201,65 @@ namespace CodeEditorWinForms
 		private void xMLToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			codeEditor.Language = FastColoredTextBoxNS.Language.XML;
+		}
+
+		private void runHTMLToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if(codeEditor.Language == FastColoredTextBoxNS.Language.HTML)
+			{
+				HTMLPreview preview = new HTMLPreview(codeEditor.Text);
+				preview.Show();
+			}
+			else
+			{
+				MessageBox.Show("Language or extension error!");
+			}
+		}
+
+		private void runCShaprCodeToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			SaveFileDialog sf = new SaveFileDialog();
+			sf.Filter = "Executable File|*.exe";
+			string OutPath = "?.exe";
+			if (sf.ShowDialog() == DialogResult.OK)
+			{
+				OutPath = sf.FileName;
+			}
+			//compile code:
+			//create c# code compiler
+			CSharpCodeProvider codeProvider = new CSharpCodeProvider();
+			//create new parameters for compilation and add references(libs) to compiled app
+			CompilerParameters parameters = new CompilerParameters(new string[] { "System.dll" });
+			//is compiled code will be executable?(.exe)
+			parameters.GenerateExecutable = true;
+			//output path
+			parameters.OutputAssembly = OutPath;
+			//code sources to compile
+			string[] sources = { codeEditor.Text };
+			//results of compilation
+			CompilerResults results = codeProvider.CompileAssemblyFromSource(parameters, sources);
+
+			//if has errors
+			if (results.Errors.Count > 0)
+			{
+				string errsText = "";
+				foreach (CompilerError CompErr in results.Errors)
+				{
+					errsText = "(" + CompErr.ErrorNumber +
+								")Line " + CompErr.Line +
+								",Column " + CompErr.Column +
+								":" + CompErr.ErrorText + "" +
+								Environment.NewLine;
+				}
+				//show error message
+				MessageBox.Show(errsText, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+			else
+			{
+				//run compiled app
+				System.Diagnostics.Process.Start(OutPath);
+			}
+
 		}
 	}
 }
