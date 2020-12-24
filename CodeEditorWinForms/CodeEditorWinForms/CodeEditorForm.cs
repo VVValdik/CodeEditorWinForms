@@ -19,24 +19,24 @@ namespace CodeEditorWinForms
 		private ToolStripMenuItem currentLanguage;
 		private FileExplorer fileExplorer;
 
-		Dictionary<string, FastColoredTextBoxNS.Language> languages =
-				new Dictionary<string, FastColoredTextBoxNS.Language>
+		Dictionary<string, Language> languages =
+				new Dictionary<string, Language>
 				{
-					{"C#", FastColoredTextBoxNS.Language.CSharp},
-					{"VB", FastColoredTextBoxNS.Language.VB},
-					{"HTML", FastColoredTextBoxNS.Language.HTML},
-					{"XML", FastColoredTextBoxNS.Language.XML},
-					{"JS", FastColoredTextBoxNS.Language.JS},
-					{"PHP", FastColoredTextBoxNS.Language.PHP},
-					{"LUA", FastColoredTextBoxNS.Language.Lua},
-					{"SQL", FastColoredTextBoxNS.Language.SQL},
+					{"C#", Language.CSharp},
+					{"VB", Language.VB},
+					{"HTML", Language.HTML},
+					{"XML", Language.XML},
+					{"JS", Language.JS},
+					{"PHP", Language.PHP},
+					{"LUA", Language.Lua},
+					{"SQL", Language.SQL},
 				};
 
 		public CodeEditorForm()
 		{
 			InitializeComponent();
 
-			SettingsInit();
+			Settings.Init();
 			InitCodeEditor();
 			InitFileExplorer();
 		}
@@ -48,15 +48,14 @@ namespace CodeEditorWinForms
 
 		private void InitCodeEditor()
 		{
-			var editor = AddNewTab(NewTab);
-
-			editor.Focus();
+			AddNewTab(NewTab);
+			GetCurrentCodeEditor().Focus();
 
 			currentLanguage = cToolStripMenuItem;
 			SelectLanguage(currentLanguage);
 		}
 		
-		CodeEditor AddNewTab(string name)
+		void AddNewTab(string name)
 		{
 			TabPage newTab = new TabPage();
 			newTab.Text = name;
@@ -67,14 +66,12 @@ namespace CodeEditorWinForms
 			tabControl.Controls.Add(newTab);
 
 			tabControl.SelectTab(tabControl.TabCount - 1);
-
-			return editor;
 		}
 
-		private void newToolStripMenuItem_Click(object sender, EventArgs e)
+		private void NewToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			var codeEditor = AddNewTab(NewTab);
-			codeEditor.Text = "";
+			AddNewTab(NewTab);
+			GetCurrentCodeEditor().Text = "";
 		}
 
 		private void OpenFileDialog()
@@ -87,8 +84,8 @@ namespace CodeEditorWinForms
 			{
 				StreamReader streamReader = new StreamReader(openFileDialog.FileName);
 
-				var codeEditor = AddNewTab(Path.GetFileName(openFileDialog.FileName));
-				codeEditor.Text = streamReader.ReadToEnd();
+				AddNewTab(Path.GetFileName(openFileDialog.FileName));
+				GetCurrentCodeEditor().Text = streamReader.ReadToEnd();
 
 				streamReader.Close();
 			}
@@ -115,29 +112,27 @@ namespace CodeEditorWinForms
 			}
 		}
 
-		private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+		private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			SaveFileDialog saveFileDialog = new SaveFileDialog();
-
 			saveFileDialog.Filter = FileDialogFilterAny;
 
 			if (saveFileDialog.ShowDialog() == DialogResult.OK)
 			{
 				StreamWriter streamWriter = new StreamWriter(saveFileDialog.FileName);
-
-				var codeEditor = tabControl.SelectedTab.Controls[0] as FastColoredTextBox;
-				streamWriter.Write(codeEditor.Text);
+				
+				streamWriter.Write(GetCurrentCodeEditor().Text);
 
 				streamWriter.Close();
 			}
 		}
 
-		private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+		private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			Application.Exit();
 		}
 
-		private void cutToolStripMenuItem_Click(object sender, EventArgs e)
+		private void CutToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if(!HasTabs())
 			{
@@ -148,7 +143,7 @@ namespace CodeEditorWinForms
 			codeEditor.Cut();
 		}
 
-		private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+		private void CopyToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if (!HasTabs())
 			{
@@ -160,7 +155,7 @@ namespace CodeEditorWinForms
 			codeEditor.Copy();
 		}
 
-		private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
+		private void PasteToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if (!HasTabs())
 			{
@@ -172,7 +167,7 @@ namespace CodeEditorWinForms
 			codeEditor.Paste();
 		}
 
-		private void backgroundColorToolStripMenuItem_Click(object sender, EventArgs e)
+		private void BackgroundColorToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			ColorDialog colorDialog = new ColorDialog();
 
@@ -189,7 +184,7 @@ namespace CodeEditorWinForms
 			return codeEditor;
 		}
 
-		private void textColorToolStripMenuItem_Click(object sender, EventArgs e)
+		private void TextColorToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			ColorDialog colorDialog = new ColorDialog();
 
@@ -200,7 +195,7 @@ namespace CodeEditorWinForms
 			}
 		}
 
-		private void undoToolStripMenuItem_Click(object sender, EventArgs e)
+		private void UndoToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if (!HasTabs())
 			{
@@ -208,11 +203,10 @@ namespace CodeEditorWinForms
 			}
 
 			var codeEditor = GetCurrentCodeEditor();
-
 			codeEditor.Undo();
 		}
 
-		private void redoToolStripMenuItem_Click(object sender, EventArgs e)
+		private void RedoToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if (!HasTabs())
 			{
@@ -220,11 +214,10 @@ namespace CodeEditorWinForms
 			}
 
 			var codeEditor = GetCurrentCodeEditor();
-
 			codeEditor.Redo();
 		}
 
-		private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
+		private void SelectAllToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if (!HasTabs())
 			{
@@ -232,11 +225,10 @@ namespace CodeEditorWinForms
 			}
 
 			var codeEditor = GetCurrentCodeEditor();
-
 			codeEditor.SelectAll();
 		}
 
-		private void cutToolStripMenuItem1_Click(object sender, EventArgs e)
+		private void CutToolStripMenuItem1_Click(object sender, EventArgs e)
 		{
 			if (!HasTabs())
 			{
@@ -244,11 +236,10 @@ namespace CodeEditorWinForms
 			}
 
 			var codeEditor = GetCurrentCodeEditor();
-
 			codeEditor.Cut();
 		}
 
-		private void copyToolStripMenuItem1_Click(object sender, EventArgs e)
+		private void CopyToolStripMenuItem1_Click(object sender, EventArgs e)
 		{
 			if (!HasTabs())
 			{
@@ -256,11 +247,10 @@ namespace CodeEditorWinForms
 			}
 
 			var codeEditor = GetCurrentCodeEditor();
-
 			codeEditor.Copy();
 		}
 
-		private void pasteToolStripMenuItem1_Click(object sender, EventArgs e)
+		private void PasteToolStripMenuItem1_Click(object sender, EventArgs e)
 		{
 			if (!HasTabs())
 			{
@@ -268,11 +258,10 @@ namespace CodeEditorWinForms
 			}
 
 			var codeEditor = GetCurrentCodeEditor();
-
 			codeEditor.Paste();
 		}
 
-		private void findToolStripMenuItem_Click(object sender, EventArgs e)
+		private void FindToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if (!HasTabs())
 			{
@@ -280,11 +269,10 @@ namespace CodeEditorWinForms
 			}
 
 			var codeEditor = GetCurrentCodeEditor();
-
 			codeEditor.ShowFindDialog();
 		}
 
-		private void goToToolStripMenuItem_Click(object sender, EventArgs e)
+		private void GoToToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if (!HasTabs())
 			{
@@ -292,11 +280,10 @@ namespace CodeEditorWinForms
 			}
 
 			var codeEditor = GetCurrentCodeEditor();
-
 			codeEditor.ShowGoToDialog();
 		}
 
-		private void replaceToolStripMenuItem_Click(object sender, EventArgs e)
+		private void ReplaceToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if (!HasTabs())
 			{
@@ -304,7 +291,6 @@ namespace CodeEditorWinForms
 			}
 
 			var codeEditor = GetCurrentCodeEditor();
-
 			codeEditor.ShowReplaceDialog();
 		}
 
@@ -315,12 +301,12 @@ namespace CodeEditorWinForms
 			currentLanguage.Checked = true;
 
 			SetLanguage(currentLanguage.Text);
-
+			
 			var codeEditor = tabControl.SelectedTab.Controls[0] as FastColoredTextBox;
 			codeEditor.Refresh();
 		}
 
-		private void cToolStripMenuItem_Click(object sender, EventArgs e)
+		private void CToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			SelectLanguage(sender);
 		}
@@ -551,15 +537,6 @@ namespace CodeEditorWinForms
 					codeEditor.SetEditorStyle();
 				}
 				catch { }
-			}
-		}
-
-		private void SettingsInit()
-		{
-			if(Properties.Settings.Default.FirstStart)
-			{
-				Properties.Settings.Default.BackgroundColor = DefaultBackColor;
-				Properties.Settings.Default.ForeColor = DefaultForeColor;
 			}
 		}
 
