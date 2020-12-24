@@ -687,5 +687,14 @@ namespace CodeEditorWinForms
 			ThemeEditor themeEditor = new ThemeEditor();
 			themeEditor.ShowDialog();
 		}
+
+		private void FirstStartInit()
+		{
+			if(Properties.Settings.Default.FirstStart)
+			{
+				Properties.Settings.Default.BackgroundColor = DefaultBackColor;
+				Properties.Settings.Default.TextColor = DefaultForeColor;
+			}
+		}
 	}
 }

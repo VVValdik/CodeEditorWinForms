@@ -24,7 +24,8 @@ namespace CodeEditorWinForms
 
 		private void InitColors()
 		{
-
+			backgroundColorBox.BackColor = Properties.Settings.Default.BackgroundColor;
+			textColorBox.BackColor = Properties.Settings.Default.TextColor;
 		}
 
 		private void SaveColor(string name, Color color)
