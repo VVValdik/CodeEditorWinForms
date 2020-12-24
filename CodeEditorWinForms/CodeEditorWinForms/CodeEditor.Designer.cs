@@ -1,6 +1,6 @@
 ﻿namespace CodeEditorWinForms
 {
-	partial class Form1
+	partial class CodeEditor
 	{
 		/// <summary>
 		/// Обязательная переменная конструктора.
@@ -54,8 +54,7 @@
 			this.lUAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.xMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.backgroundColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.textColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.themeEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.runHTMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.runCShaprCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,11 +65,11 @@
 			this.pasteToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.tabControl1 = new System.Windows.Forms.TabControl();
-			this.treeView1 = new System.Windows.Forms.TreeView();
+			this.treeView = new System.Windows.Forms.TreeView();
 			this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.newToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.themeEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.fontSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
 			this.contextMenuStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -304,26 +303,18 @@
 			// settingsToolStripMenuItem
 			// 
 			this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.backgroundColorToolStripMenuItem,
-            this.textColorToolStripMenuItem,
-            this.themeEditorToolStripMenuItem});
+            this.themeEditorToolStripMenuItem,
+            this.fontSizeToolStripMenuItem});
 			this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
 			this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
 			this.settingsToolStripMenuItem.Text = "Settings";
 			// 
-			// backgroundColorToolStripMenuItem
+			// themeEditorToolStripMenuItem
 			// 
-			this.backgroundColorToolStripMenuItem.Name = "backgroundColorToolStripMenuItem";
-			this.backgroundColorToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-			this.backgroundColorToolStripMenuItem.Text = "Background color";
-			this.backgroundColorToolStripMenuItem.Click += new System.EventHandler(this.backgroundColorToolStripMenuItem_Click);
-			// 
-			// textColorToolStripMenuItem
-			// 
-			this.textColorToolStripMenuItem.Name = "textColorToolStripMenuItem";
-			this.textColorToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-			this.textColorToolStripMenuItem.Text = "Text color";
-			this.textColorToolStripMenuItem.Click += new System.EventHandler(this.textColorToolStripMenuItem_Click);
+			this.themeEditorToolStripMenuItem.Name = "themeEditorToolStripMenuItem";
+			this.themeEditorToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+			this.themeEditorToolStripMenuItem.Text = "ThemeEditor";
+			this.themeEditorToolStripMenuItem.Click += new System.EventHandler(this.themeEditorToolStripMenuItem_Click);
 			// 
 			// runToolStripMenuItem
 			// 
@@ -398,7 +389,7 @@
 			// 
 			// splitContainer1.Panel2
 			// 
-			this.splitContainer1.Panel2.Controls.Add(this.treeView1);
+			this.splitContainer1.Panel2.Controls.Add(this.treeView);
 			this.splitContainer1.Size = new System.Drawing.Size(800, 426);
 			this.splitContainer1.SplitterDistance = 629;
 			this.splitContainer1.TabIndex = 4;
@@ -415,13 +406,13 @@
 			// 
 			// treeView1
 			// 
-			this.treeView1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-			this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.treeView1.Location = new System.Drawing.Point(0, 0);
-			this.treeView1.Name = "treeView1";
-			this.treeView1.Size = new System.Drawing.Size(167, 426);
-			this.treeView1.TabIndex = 0;
-			this.treeView1.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
+			this.treeView.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.treeView.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.treeView.Location = new System.Drawing.Point(0, 0);
+			this.treeView.Name = "treeView1";
+			this.treeView.Size = new System.Drawing.Size(167, 426);
+			this.treeView.TabIndex = 0;
+			this.treeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
 			// 
 			// contextMenuStrip2
 			// 
@@ -434,24 +425,24 @@
 			// newToolStripMenuItem1
 			// 
 			this.newToolStripMenuItem1.Name = "newToolStripMenuItem1";
-			this.newToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+			this.newToolStripMenuItem1.Size = new System.Drawing.Size(103, 22);
 			this.newToolStripMenuItem1.Text = "New";
 			this.newToolStripMenuItem1.Click += new System.EventHandler(this.newToolStripMenuItem1_Click);
 			// 
 			// closeToolStripMenuItem
 			// 
 			this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-			this.closeToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+			this.closeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.closeToolStripMenuItem.Text = "Close";
+			this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click_1);
 			// 
-			// themeEditorToolStripMenuItem
+			// fontSizeToolStripMenuItem
 			// 
-			this.themeEditorToolStripMenuItem.Name = "themeEditorToolStripMenuItem";
-			this.themeEditorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-			this.themeEditorToolStripMenuItem.Text = "ThemeEditor";
-			this.themeEditorToolStripMenuItem.Click += new System.EventHandler(this.themeEditorToolStripMenuItem_Click);
+			this.fontSizeToolStripMenuItem.Name = "fontSizeToolStripMenuItem";
+			this.fontSizeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.fontSizeToolStripMenuItem.Text = "Font size";
 			// 
-			// Form1
+			// CodeEditor
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -459,8 +450,8 @@
 			this.Controls.Add(this.splitContainer1);
 			this.Controls.Add(this.menuStrip1);
 			this.MainMenuStrip = this.menuStrip1;
-			this.Name = "Form1";
-			this.Text = "Form1";
+			this.Name = "CodeEditor";
+			this.Text = "CodeEditor";
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
 			this.contextMenuStrip1.ResumeLayout(false);
@@ -488,8 +479,6 @@
 		private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem backgroundColorToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem textColorToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem undoToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem redoToolStripMenuItem;
 		private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
@@ -513,7 +502,7 @@
 		private System.Windows.Forms.ToolStripMenuItem runHTMLToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem runCShaprCodeToolStripMenuItem;
 		private System.Windows.Forms.SplitContainer splitContainer1;
-		private System.Windows.Forms.TreeView treeView1;
+		private System.Windows.Forms.TreeView treeView;
 		private System.Windows.Forms.ToolStripMenuItem openProjectFolderToolStripMenuItem;
 		private System.Windows.Forms.TabControl tabControl1;
 		private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
@@ -521,6 +510,7 @@
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
 		private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem themeEditorToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem fontSizeToolStripMenuItem;
 	}
 }
 
