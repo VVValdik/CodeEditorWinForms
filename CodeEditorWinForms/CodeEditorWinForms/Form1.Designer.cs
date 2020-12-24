@@ -59,7 +59,6 @@
 			this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.runHTMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.runCShaprCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.settingsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.cutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -71,6 +70,7 @@
 			this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.newToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.themeEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
 			this.contextMenuStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -87,8 +87,7 @@
             this.editToolStripMenuItem,
             this.languageToolStripMenuItem,
             this.settingsToolStripMenuItem,
-            this.runToolStripMenuItem,
-            this.settingsToolStripMenuItem1});
+            this.runToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
 			this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -306,7 +305,8 @@
 			// 
 			this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.backgroundColorToolStripMenuItem,
-            this.textColorToolStripMenuItem});
+            this.textColorToolStripMenuItem,
+            this.themeEditorToolStripMenuItem});
 			this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
 			this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
 			this.settingsToolStripMenuItem.Text = "Settings";
@@ -347,12 +347,6 @@
 			this.runCShaprCodeToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
 			this.runCShaprCodeToolStripMenuItem.Text = "Run CShapr code";
 			this.runCShaprCodeToolStripMenuItem.Click += new System.EventHandler(this.runCShaprCodeToolStripMenuItem_Click);
-			// 
-			// settingsToolStripMenuItem1
-			// 
-			this.settingsToolStripMenuItem1.Name = "settingsToolStripMenuItem1";
-			this.settingsToolStripMenuItem1.Size = new System.Drawing.Size(61, 20);
-			this.settingsToolStripMenuItem1.Text = "Settings";
 			// 
 			// contextMenuStrip1
 			// 
@@ -411,16 +405,17 @@
 			// 
 			// tabControl1
 			// 
-			this.tabControl1.Location = new System.Drawing.Point(3, 0);
+			this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tabControl1.Location = new System.Drawing.Point(0, 0);
 			this.tabControl1.Name = "tabControl1";
 			this.tabControl1.SelectedIndex = 0;
-			this.tabControl1.Size = new System.Drawing.Size(624, 426);
+			this.tabControl1.Size = new System.Drawing.Size(629, 426);
 			this.tabControl1.TabIndex = 0;
 			this.tabControl1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tabControl1_MouseClick);
 			// 
 			// treeView1
 			// 
-			this.treeView1.BackColor = System.Drawing.SystemColors.Info;
+			this.treeView1.BackColor = System.Drawing.SystemColors.ControlLightLight;
 			this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.treeView1.Location = new System.Drawing.Point(0, 0);
 			this.treeView1.Name = "treeView1";
@@ -434,7 +429,7 @@
             this.newToolStripMenuItem1,
             this.closeToolStripMenuItem});
 			this.contextMenuStrip2.Name = "contextMenuStrip2";
-			this.contextMenuStrip2.Size = new System.Drawing.Size(181, 70);
+			this.contextMenuStrip2.Size = new System.Drawing.Size(104, 48);
 			// 
 			// newToolStripMenuItem1
 			// 
@@ -446,9 +441,15 @@
 			// closeToolStripMenuItem
 			// 
 			this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-			this.closeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.closeToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
 			this.closeToolStripMenuItem.Text = "Close";
-			this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
+			// 
+			// themeEditorToolStripMenuItem
+			// 
+			this.themeEditorToolStripMenuItem.Name = "themeEditorToolStripMenuItem";
+			this.themeEditorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.themeEditorToolStripMenuItem.Text = "ThemeEditor";
+			this.themeEditorToolStripMenuItem.Click += new System.EventHandler(this.themeEditorToolStripMenuItem_Click);
 			// 
 			// Form1
 			// 
@@ -511,7 +512,6 @@
 		private System.Windows.Forms.ToolStripMenuItem runToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem runHTMLToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem runCShaprCodeToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem1;
 		private System.Windows.Forms.SplitContainer splitContainer1;
 		private System.Windows.Forms.TreeView treeView1;
 		private System.Windows.Forms.ToolStripMenuItem openProjectFolderToolStripMenuItem;
@@ -520,6 +520,7 @@
 		private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem1;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
 		private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem themeEditorToolStripMenuItem;
 	}
 }
 
