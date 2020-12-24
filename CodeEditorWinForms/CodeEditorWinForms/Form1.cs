@@ -10,13 +10,19 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.CodeDom.Compiler;
 using Microsoft.CSharp;
+using FastColoredTextBoxNS;
 
 namespace CodeEditorWinForms
 {
 	public partial class Form1 : Form
 	{
+		string NewTab = "new tab";
 
 		ToolStripMenuItem currentLanguage;
+
+		string currentPath = "";
+
+		int tabClickIndex = -1;
 
 		Dictionary<string, FastColoredTextBoxNS.Language> languages =
 				new Dictionary<string, FastColoredTextBoxNS.Language>
@@ -47,6 +53,7 @@ namespace CodeEditorWinForms
 
 		private void PopulateTreeView(string path)
 		{
+			currentPath = path;
 			treeView1.Nodes.Clear();
 
 			DirectoryInfo directoryInfo = new DirectoryInfo(path);
@@ -72,12 +79,30 @@ namespace CodeEditorWinForms
 
 		private void Init()
 		{
+			AddNewTab(NewTab);
 			currentLanguage = cToolStripMenuItem;
 			SelectLanguage(currentLanguage);
 		}
 
+		FastColoredTextBox AddNewTab(string name)
+		{
+			TabPage newTab = new TabPage();
+			newTab.Text = name;
+
+			FastColoredTextBox editor = new FastColoredTextBox();
+			editor.Dock = DockStyle.Fill;
+
+			newTab.Controls.Add(editor);
+			tabControl1.Controls.Add(newTab);
+
+			tabControl1.SelectTab(tabControl1.TabCount - 1);
+
+			return editor;
+		}
+
 		private void newToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			var codeEditor = AddNewTab(NewTab);
 			codeEditor.Text = "";
 		}
 
@@ -85,12 +110,13 @@ namespace CodeEditorWinForms
 		{
 			OpenFileDialog openFileDialog = new OpenFileDialog();
 
-			openFileDialog.Filter = "Text file|*.txt|Any file|*.*";
+			openFileDialog.Filter = "Any file|*.*|Text file|*.txt";
 
 			if (openFileDialog.ShowDialog() == DialogResult.OK)
 			{
 				StreamReader streamReader = new StreamReader(openFileDialog.FileName);
 
+				var codeEditor = AddNewTab(Path.GetFullPath(openFileDialog.FileName));
 				codeEditor.Text = streamReader.ReadToEnd();
 
 				streamReader.Close();
@@ -109,6 +135,8 @@ namespace CodeEditorWinForms
 			try
 			{
 				StreamWriter streamWriter = new StreamWriter(this.Text);
+
+				var codeEditor = tabControl1.SelectedTab.Controls[0] as FastColoredTextBox;
 				streamWriter.Write(codeEditor.Text);
 				streamWriter.Close();
 			}
@@ -128,6 +156,7 @@ namespace CodeEditorWinForms
 			{
 				StreamWriter streamWriter = new StreamWriter(saveFileDialog.FileName);
 
+				var codeEditor = tabControl1.SelectedTab.Controls[0] as FastColoredTextBox;
 				streamWriter.Write(codeEditor.Text);
 
 				streamWriter.Close();
@@ -141,16 +170,19 @@ namespace CodeEditorWinForms
 
 		private void cutToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			var codeEditor = tabControl1.SelectedTab.Controls[0] as FastColoredTextBox;
 			codeEditor.Cut();
 		}
 
 		private void copyToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			var codeEditor = tabControl1.SelectedTab.Controls[0] as FastColoredTextBox;
 			codeEditor.Copy();
 		}
 
 		private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			var codeEditor = tabControl1.SelectedTab.Controls[0] as FastColoredTextBox;
 			codeEditor.Paste();
 		}
 
@@ -160,6 +192,7 @@ namespace CodeEditorWinForms
 
 			if (colorDialog.ShowDialog() == DialogResult.OK)
 			{
+				var codeEditor = tabControl1.SelectedTab.Controls[0] as FastColoredTextBox;
 				codeEditor.BackColor = colorDialog.Color;
 			}
 		}
@@ -170,52 +203,62 @@ namespace CodeEditorWinForms
 
 			if (colorDialog.ShowDialog() == DialogResult.OK)
 			{
+				var codeEditor = tabControl1.SelectedTab.Controls[0] as FastColoredTextBox;
 				codeEditor.ForeColor = colorDialog.Color;
 			}
 		}
 
 		private void undoToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			var codeEditor = tabControl1.SelectedTab.Controls[0] as FastColoredTextBox;
 			codeEditor.Undo();
 		}
 
 		private void redoToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			var codeEditor = tabControl1.SelectedTab.Controls[0] as FastColoredTextBox;
 			codeEditor.Redo();
 		}
 
 		private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			var codeEditor = tabControl1.SelectedTab.Controls[0] as FastColoredTextBox;
 			codeEditor.SelectAll();
 		}
 
 		private void cutToolStripMenuItem1_Click(object sender, EventArgs e)
 		{
+			var codeEditor = tabControl1.SelectedTab.Controls[0] as FastColoredTextBox;
 			codeEditor.Cut();
 		}
 
 		private void copyToolStripMenuItem1_Click(object sender, EventArgs e)
 		{
+			var codeEditor = tabControl1.SelectedTab.Controls[0] as FastColoredTextBox;
 			codeEditor.Copy();
 		}
 
 		private void pasteToolStripMenuItem1_Click(object sender, EventArgs e)
 		{
+			var codeEditor = tabControl1.SelectedTab.Controls[0] as FastColoredTextBox;
 			codeEditor.Paste();
 		}
 
 		private void findToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			var codeEditor = tabControl1.SelectedTab.Controls[0] as FastColoredTextBox;
 			codeEditor.ShowFindDialog();
 		}
 
 		private void goToToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			var codeEditor = tabControl1.SelectedTab.Controls[0] as FastColoredTextBox;
 			codeEditor.ShowGoToDialog();
 		}
 
 		private void replaceToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			var codeEditor = tabControl1.SelectedTab.Controls[0] as FastColoredTextBox;
 			codeEditor.ShowReplaceDialog();
 		}
 
@@ -225,8 +268,9 @@ namespace CodeEditorWinForms
 			currentLanguage = ((ToolStripMenuItem)sender);
 			currentLanguage.Checked = true;
 
-			codeEditor.Language = languages[currentLanguage.Text];
+			SetLanguage(currentLanguage.Text);
 
+			var codeEditor = tabControl1.SelectedTab.Controls[0] as FastColoredTextBox;
 			codeEditor.Refresh();
 		}
 
@@ -272,6 +316,7 @@ namespace CodeEditorWinForms
 
 		private void runHTMLToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			var codeEditor = tabControl1.SelectedTab.Controls[0] as FastColoredTextBox;
 			if (codeEditor.Language == FastColoredTextBoxNS.Language.HTML)
 			{
 				HTMLPreview preview = new HTMLPreview(codeEditor.Text);
@@ -302,6 +347,7 @@ namespace CodeEditorWinForms
 			//output path
 			parameters.OutputAssembly = OutPath;
 			//code sources to compile
+			var codeEditor = tabControl1.SelectedTab.Controls[0] as FastColoredTextBox;
 			string[] sources = { codeEditor.Text };
 			//results of compilation
 			CompilerResults results = codeProvider.CompileAssemblyFromSource(parameters, sources);
@@ -329,12 +375,92 @@ namespace CodeEditorWinForms
 
 		}
 
+		void SetLanguage(string language)
+		{
+			if (languages.ContainsKey(language))
+			{
+				var codeEditor = tabControl1.SelectedTab.Controls[0] as FastColoredTextBox;
+				codeEditor.Language = languages[language];
+
+			}
+			else
+			{
+				var codeEditor = tabControl1.SelectedTab.Controls[0] as FastColoredTextBox;
+				codeEditor.Language = FastColoredTextBoxNS.Language.CSharp;
+			}
+
+			currentLanguage.Checked = false;
+			switch (language)
+			{
+				case "VB":
+					{
+						currentLanguage = vBToolStripMenuItem;
+					}
+					break;
+				case "XML":
+					{
+						currentLanguage = xMLToolStripMenuItem;
+					}
+					break;
+				case "HTML":
+					{
+						currentLanguage = hTMLToolStripMenuItem;
+					}
+					break;
+				case "LUA":
+					{
+						currentLanguage = lUAToolStripMenuItem;
+					}
+					break;
+				case "PHP":
+					{
+						currentLanguage = pHPToolStripMenuItem;
+					}
+					break;
+				case "SQL":
+					{
+						currentLanguage = sQLToolStripMenuItem;
+					}
+					break;
+				case "JS":
+					{
+						currentLanguage = jSToolStripMenuItem;
+					}
+					break;
+				default:
+					{
+						currentLanguage = cToolStripMenuItem;
+					}
+					break;
+			}
+
+			currentLanguage.Checked = true;
+		}
+
+		void OpenFile(string fullPath)
+		{
+			StreamReader streamReader = new StreamReader(fullPath);
+
+			string language = fullPath.Split('.')[1].ToUpper();
+			SetLanguage(language);
+
+			AddNewTab(Path.GetFileName(fullPath));
+			var codeEditor = tabControl1.SelectedTab.Controls[0] as FastColoredTextBox;
+			codeEditor.Text = streamReader.ReadToEnd();
+
+
+
+			streamReader.Close();
+		}
+
 		void treeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
 		{
 			TreeView treeView = (TreeView)sender;
 			if (treeView.SelectedNode.GetNodeCount(true) == 0)
 			{
-				MessageBox.Show(treeView.SelectedNode.FullPath);
+				string path = treeView.SelectedNode.FullPath;
+				string fullPath = currentPath.Remove(currentPath.LastIndexOf("\\")) + "\\" + path;
+				OpenFile(fullPath);
 			}
 		}
 
@@ -346,6 +472,37 @@ namespace CodeEditorWinForms
 			{
 				PopulateTreeView(folderBrowserDialog.SelectedPath);
 			}
+		}
+
+		private void tabControl1_MouseClick(object sender, MouseEventArgs e)
+		{
+			if (e.Button == MouseButtons.Right)
+			{
+				
+				for (int i = 0; i < tabControl1.TabCount; i++)
+				{
+					// get their rectangle area and check if it contains the mouse cursor
+					Rectangle r = tabControl1.GetTabRect(i);
+					if (r.Contains(e.Location))
+					{
+						// show the context menu here
+						this.contextMenuStrip2.Show(this.tabControl1, e.Location);
+						tabClickIndex = i;
+					}
+				}
+			}
+		}
+
+
+
+		private void newToolStripMenuItem1_Click(object sender, EventArgs e)
+		{
+			AddNewTab(NewTab);
+		}
+
+		private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			tabControl1.TabPages.RemoveAt(tabClickIndex);
 		}
 	}
 }

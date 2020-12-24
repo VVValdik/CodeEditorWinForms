@@ -27,7 +27,6 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -35,6 +34,7 @@
 			this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.openProjectFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.cutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,16 +66,18 @@
 			this.copyToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.pasteToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-			this.codeEditor = new FastColoredTextBoxNS.FastColoredTextBox();
+			this.tabControl1 = new System.Windows.Forms.TabControl();
 			this.treeView1 = new System.Windows.Forms.TreeView();
-			this.openProjectFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.newToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+			this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
 			this.contextMenuStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.codeEditor)).BeginInit();
+			this.contextMenuStrip2.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// menuStrip1
@@ -143,6 +145,13 @@
 			this.exitToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
 			this.exitToolStripMenuItem.Text = "Exit";
 			this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+			// 
+			// openProjectFolderToolStripMenuItem
+			// 
+			this.openProjectFolderToolStripMenuItem.Name = "openProjectFolderToolStripMenuItem";
+			this.openProjectFolderToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+			this.openProjectFolderToolStripMenuItem.Text = "Open project folder";
+			this.openProjectFolderToolStripMenuItem.Click += new System.EventHandler(this.openProjectFolderToolStripMenuItem_Click_1);
 			// 
 			// editToolStripMenuItem
 			// 
@@ -391,7 +400,7 @@
 			// 
 			// splitContainer1.Panel1
 			// 
-			this.splitContainer1.Panel1.Controls.Add(this.codeEditor);
+			this.splitContainer1.Panel1.Controls.Add(this.tabControl1);
 			// 
 			// splitContainer1.Panel2
 			// 
@@ -400,35 +409,14 @@
 			this.splitContainer1.SplitterDistance = 629;
 			this.splitContainer1.TabIndex = 4;
 			// 
-			// codeEditor
+			// tabControl1
 			// 
-			this.codeEditor.AutoCompleteBracketsList = new char[] {
-        '(',
-        ')',
-        '{',
-        '}',
-        '[',
-        ']',
-        '\"',
-        '\"',
-        '\'',
-        '\''};
-			this.codeEditor.AutoScrollMinSize = new System.Drawing.Size(27, 14);
-			this.codeEditor.BackBrush = null;
-			this.codeEditor.CharHeight = 14;
-			this.codeEditor.CharWidth = 8;
-			this.codeEditor.Cursor = System.Windows.Forms.Cursors.IBeam;
-			this.codeEditor.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-			this.codeEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.codeEditor.IsReplaceMode = false;
-			this.codeEditor.Location = new System.Drawing.Point(0, 0);
-			this.codeEditor.Name = "codeEditor";
-			this.codeEditor.Paddings = new System.Windows.Forms.Padding(0);
-			this.codeEditor.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-			this.codeEditor.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("codeEditor.ServiceColors")));
-			this.codeEditor.Size = new System.Drawing.Size(629, 426);
-			this.codeEditor.TabIndex = 0;
-			this.codeEditor.Zoom = 100;
+			this.tabControl1.Location = new System.Drawing.Point(3, 0);
+			this.tabControl1.Name = "tabControl1";
+			this.tabControl1.SelectedIndex = 0;
+			this.tabControl1.Size = new System.Drawing.Size(624, 426);
+			this.tabControl1.TabIndex = 0;
+			this.tabControl1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tabControl1_MouseClick);
 			// 
 			// treeView1
 			// 
@@ -440,12 +428,27 @@
 			this.treeView1.TabIndex = 0;
 			this.treeView1.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
 			// 
-			// openProjectFolderToolStripMenuItem
+			// contextMenuStrip2
 			// 
-			this.openProjectFolderToolStripMenuItem.Name = "openProjectFolderToolStripMenuItem";
-			this.openProjectFolderToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
-			this.openProjectFolderToolStripMenuItem.Text = "Open project folder";
-			this.openProjectFolderToolStripMenuItem.Click += new System.EventHandler(this.openProjectFolderToolStripMenuItem_Click_1);
+			this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newToolStripMenuItem1,
+            this.closeToolStripMenuItem});
+			this.contextMenuStrip2.Name = "contextMenuStrip2";
+			this.contextMenuStrip2.Size = new System.Drawing.Size(181, 70);
+			// 
+			// newToolStripMenuItem1
+			// 
+			this.newToolStripMenuItem1.Name = "newToolStripMenuItem1";
+			this.newToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+			this.newToolStripMenuItem1.Text = "New";
+			this.newToolStripMenuItem1.Click += new System.EventHandler(this.newToolStripMenuItem1_Click);
+			// 
+			// closeToolStripMenuItem
+			// 
+			this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
+			this.closeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.closeToolStripMenuItem.Text = "Close";
+			this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
 			// 
 			// Form1
 			// 
@@ -464,7 +467,7 @@
 			this.splitContainer1.Panel2.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
 			this.splitContainer1.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.codeEditor)).EndInit();
+			this.contextMenuStrip2.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -510,9 +513,13 @@
 		private System.Windows.Forms.ToolStripMenuItem runCShaprCodeToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem1;
 		private System.Windows.Forms.SplitContainer splitContainer1;
-		private FastColoredTextBoxNS.FastColoredTextBox codeEditor;
 		private System.Windows.Forms.TreeView treeView1;
 		private System.Windows.Forms.ToolStripMenuItem openProjectFolderToolStripMenuItem;
+		private System.Windows.Forms.TabControl tabControl1;
+		private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
+		private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem1;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+		private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
 	}
 }
 
