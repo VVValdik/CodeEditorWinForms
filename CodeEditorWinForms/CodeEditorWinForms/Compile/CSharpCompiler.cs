@@ -1,10 +1,6 @@
 ﻿using Microsoft.CSharp;
 using System;
 using System.CodeDom.Compiler;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CodeEditorWinForms
@@ -44,7 +40,7 @@ namespace CodeEditorWinForms
 								":" + CompErr.ErrorText + "" +
 								Environment.NewLine;
 				}
-				//show error message
+
 				MessageBox.Show(errsText, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 			else

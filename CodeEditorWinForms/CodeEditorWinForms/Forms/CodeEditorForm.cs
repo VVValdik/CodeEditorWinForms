@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using System.CodeDom.Compiler;
-using Microsoft.CSharp;
 using FastColoredTextBoxNS;
 
 namespace CodeEditorWinForms
@@ -18,19 +15,6 @@ namespace CodeEditorWinForms
 
 		private ToolStripMenuItem currentLanguage;
 		private FileExplorer fileExplorer;
-
-		Dictionary<string, Language> languages =
-				new Dictionary<string, Language>
-				{
-					{"C#", Language.CSharp},
-					{"VB", Language.VB},
-					{"HTML", Language.HTML},
-					{"XML", Language.XML},
-					{"JS", Language.JS},
-					{"PHP", Language.PHP},
-					{"LUA", Language.Lua},
-					{"SQL", Language.SQL},
-				};
 
 		public CodeEditorForm()
 		{
@@ -57,14 +41,9 @@ namespace CodeEditorWinForms
 		
 		void AddNewTab(string name)
 		{
-			TabPage newTab = new TabPage();
-			newTab.Text = name;
+			EditorTabPage newTab = new EditorTabPage(name, tabMenuStrip);
 
-			CodeEditor editor = new CodeEditor(contextMenuStrip1);
-			
-			newTab.Controls.Add(editor);
 			tabControl.Controls.Add(newTab);
-
 			tabControl.SelectTab(tabControl.TabCount - 1);
 		}
 
@@ -102,7 +81,11 @@ namespace CodeEditorWinForms
 			{
 				StreamWriter streamWriter = new StreamWriter(this.Text);
 
-				var codeEditor = tabControl.SelectedTab.Controls[0] as FastColoredTextBox;
+				if(!HasTabs())
+				{
+					return;
+				}
+				var codeEditor = GetCurrentCodeEditor();
 				streamWriter.Write(codeEditor.Text);
 				streamWriter.Close();
 			}
@@ -311,37 +294,37 @@ namespace CodeEditorWinForms
 			SelectLanguage(sender);
 		}
 
-		private void vBToolStripMenuItem_Click(object sender, EventArgs e)
+		private void VBToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			SelectLanguage(sender);
 		}
 
-		private void hTMLToolStripMenuItem_Click(object sender, EventArgs e)
+		private void HTMLToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			SelectLanguage(sender);
 		}
 
-		private void pHPToolStripMenuItem_Click(object sender, EventArgs e)
+		private void PHPToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			SelectLanguage(sender);
 		}
 
-		private void jSToolStripMenuItem_Click(object sender, EventArgs e)
+		private void JSToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			SelectLanguage(sender);
 		}
 
-		private void sQLToolStripMenuItem_Click(object sender, EventArgs e)
+		private void SQLToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			SelectLanguage(sender);
 		}
 
-		private void lUAToolStripMenuItem_Click(object sender, EventArgs e)
+		private void LUAToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			SelectLanguage(sender);
 		}
 
-		private void xMLToolStripMenuItem_Click(object sender, EventArgs e)
+		private void XMLToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			SelectLanguage(sender);
 		}
@@ -356,7 +339,7 @@ namespace CodeEditorWinForms
 			return false;
 		}
 
-		private void runHTMLToolStripMenuItem_Click(object sender, EventArgs e)
+		private void RunHTMLToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if(!HasTabs())
 			{
@@ -364,7 +347,7 @@ namespace CodeEditorWinForms
 			}
 
 			var codeEditor = tabControl.SelectedTab.Controls[0] as CodeEditor;
-			if (codeEditor.Language == FastColoredTextBoxNS.Language.HTML)
+			if (codeEditor.Language == Language.HTML)
 			{
 				HTMLPreview preview = new HTMLPreview(codeEditor.Text);
 				preview.Show();
@@ -386,31 +369,8 @@ namespace CodeEditorWinForms
 			CSharpCompiler.Compile(codeEditor.Text);
 		}
 
-		void SetLanguage(string language)
+		void CheckCurrentLanguage(string language)
 		{
-			if (languages.ContainsKey(language))
-			{
-				if (!HasTabs())
-				{
-					return;
-				}
-
-				var codeEditor = GetCurrentCodeEditor();
-
-				codeEditor.Language = languages[language];
-			}
-			else
-			{
-				if (!HasTabs())
-				{
-					return;
-				}
-
-				var codeEditor = GetCurrentCodeEditor();
-
-				codeEditor.Language = FastColoredTextBoxNS.Language.CSharp;
-			}
-
 			currentLanguage.Checked = false;
 			switch (language)
 			{
@@ -459,6 +419,34 @@ namespace CodeEditorWinForms
 			currentLanguage.Checked = true;
 		}
 
+		void SetLanguage(string language)
+		{
+			if (Languages.languages.ContainsKey(language))
+			{
+				if (!HasTabs())
+				{
+					return;
+				}
+
+				var codeEditor = GetCurrentCodeEditor();
+
+				codeEditor.Language = Languages.languages[language];
+			}
+			else
+			{
+				if (!HasTabs())
+				{
+					return;
+				}
+
+				var codeEditor = GetCurrentCodeEditor();
+
+				codeEditor.Language = Language.CSharp;
+			}
+
+			CheckCurrentLanguage(language);
+		}
+
 		void OpenFile(string fullPath)
 		{
 			StreamReader streamReader = new StreamReader(fullPath);
@@ -492,7 +480,7 @@ namespace CodeEditorWinForms
 			}
 		}
 
-		private void openProjectFolderToolStripMenuItem_Click_1(object sender, EventArgs e)
+		private void OpenProjectFolderToolStripMenuItem_Click_1(object sender, EventArgs e)
 		{
 			FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
 
@@ -513,7 +501,7 @@ namespace CodeEditorWinForms
 					if (r.Contains(e.Location))
 					{
 						// show the context menu here
-						this.contextMenuStrip2.Show(this.tabControl, e.Location);
+						this.tabMenuStrip.Show(this.tabControl, e.Location);
 						tabClickIndex = i;
 					}
 				}
