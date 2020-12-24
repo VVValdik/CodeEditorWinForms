@@ -38,12 +38,12 @@ namespace CodeEditorWinForms.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Black")]
-        public global::System.Drawing.Color TextColor {
+        public global::System.Drawing.Color ForeColor {
             get {
-                return ((global::System.Drawing.Color)(this["TextColor"]));
+                return ((global::System.Drawing.Color)(this["ForeColor"]));
             }
             set {
-                this["TextColor"] = value;
+                this["ForeColor"] = value;
             }
         }
         
@@ -56,6 +56,17 @@ namespace CodeEditorWinForms.Properties {
             }
             set {
                 this["FirstStart"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Drawing.Color Параметр {
+            get {
+                return ((global::System.Drawing.Color)(this["Параметр"]));
+            }
+            set {
+                this["Параметр"] = value;
             }
         }
     }

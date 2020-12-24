@@ -25,7 +25,7 @@ namespace CodeEditorWinForms
 		private void InitColors()
 		{
 			backgroundColorBox.BackColor = Properties.Settings.Default.BackgroundColor;
-			textColorBox.BackColor = Properties.Settings.Default.TextColor;
+			textColorBox.BackColor = Properties.Settings.Default.ForeColor;
 		}
 
 		private void SaveColor(string name, Color color)

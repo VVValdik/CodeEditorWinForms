@@ -50,6 +50,7 @@
 			// backgroundColorBox
 			// 
 			this.backgroundColorBox.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+			this.backgroundColorBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.backgroundColorBox.Location = new System.Drawing.Point(128, 31);
 			this.backgroundColorBox.Name = "backgroundColorBox";
 			this.backgroundColorBox.Size = new System.Drawing.Size(41, 23);
@@ -60,6 +61,7 @@
 			// textColorBox
 			// 
 			this.textColorBox.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+			this.textColorBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.textColorBox.Location = new System.Drawing.Point(128, 67);
 			this.textColorBox.Name = "textColorBox";
 			this.textColorBox.Size = new System.Drawing.Size(41, 23);

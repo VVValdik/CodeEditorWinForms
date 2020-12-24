@@ -55,9 +55,12 @@ namespace CodeEditorWinForms
 		{
 			InitializeComponent();
 
+			FirstStartInit();
+
 			Init();
 
 			InitFileExplorer();
+
 		}
 
 		private void BuildAutocompleteMenu()
@@ -249,10 +252,17 @@ namespace CodeEditorWinForms
 		private void Init()
 		{
 			var editor = AddNewTab(NewTab);
+
 			editor.Focus();
 
 			currentLanguage = cToolStripMenuItem;
 			SelectLanguage(currentLanguage);
+		}
+
+		private void SetEditorStyle(FastColoredTextBox editor)
+		{
+			editor.BackColor = Properties.Settings.Default.BackgroundColor;
+			editor.ForeColor = Properties.Settings.Default.ForeColor;
 		}
 
 		FastColoredTextBox AddNewTab(string name)
@@ -693,7 +703,7 @@ namespace CodeEditorWinForms
 			if(Properties.Settings.Default.FirstStart)
 			{
 				Properties.Settings.Default.BackgroundColor = DefaultBackColor;
-				Properties.Settings.Default.TextColor = DefaultForeColor;
+				Properties.Settings.Default.ForeColor = DefaultForeColor;
 			}
 		}
 	}
