@@ -1,6 +1,6 @@
 ﻿namespace CodeEditorWinForms
 {
-	partial class CodeEditor
+	partial class CodeEditorForm
 	{
 		/// <summary>
 		/// Обязательная переменная конструктора.
@@ -64,7 +64,7 @@
 			this.copyToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.pasteToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-			this.tabControl1 = new System.Windows.Forms.TabControl();
+			this.tabControl = new System.Windows.Forms.TabControl();
 			this.treeView = new System.Windows.Forms.TreeView();
 			this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.newToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -314,7 +314,7 @@
 			this.themeEditorToolStripMenuItem.Name = "themeEditorToolStripMenuItem";
 			this.themeEditorToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
 			this.themeEditorToolStripMenuItem.Text = "ThemeEditor";
-			this.themeEditorToolStripMenuItem.Click += new System.EventHandler(this.themeEditorToolStripMenuItem_Click);
+			this.themeEditorToolStripMenuItem.Click += new System.EventHandler(this.ThemeEditorToolStripMenuItem_Click);
 			// 
 			// runToolStripMenuItem
 			// 
@@ -337,7 +337,7 @@
 			this.runCShaprCodeToolStripMenuItem.Name = "runCShaprCodeToolStripMenuItem";
 			this.runCShaprCodeToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
 			this.runCShaprCodeToolStripMenuItem.Text = "Run CShapr code";
-			this.runCShaprCodeToolStripMenuItem.Click += new System.EventHandler(this.runCShaprCodeToolStripMenuItem_Click);
+			this.runCShaprCodeToolStripMenuItem.Click += new System.EventHandler(this.RunCShaprCodeToolStripMenuItem_Click);
 			// 
 			// contextMenuStrip1
 			// 
@@ -385,7 +385,7 @@
 			// 
 			// splitContainer1.Panel1
 			// 
-			this.splitContainer1.Panel1.Controls.Add(this.tabControl1);
+			this.splitContainer1.Panel1.Controls.Add(this.tabControl);
 			// 
 			// splitContainer1.Panel2
 			// 
@@ -396,13 +396,13 @@
 			// 
 			// tabControl1
 			// 
-			this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tabControl1.Location = new System.Drawing.Point(0, 0);
-			this.tabControl1.Name = "tabControl1";
-			this.tabControl1.SelectedIndex = 0;
-			this.tabControl1.Size = new System.Drawing.Size(629, 426);
-			this.tabControl1.TabIndex = 0;
-			this.tabControl1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tabControl1_MouseClick);
+			this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tabControl.Location = new System.Drawing.Point(0, 0);
+			this.tabControl.Name = "tabControl1";
+			this.tabControl.SelectedIndex = 0;
+			this.tabControl.Size = new System.Drawing.Size(629, 426);
+			this.tabControl.TabIndex = 0;
+			this.tabControl.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TabControl1_MouseClick);
 			// 
 			// treeView1
 			// 
@@ -412,7 +412,7 @@
 			this.treeView.Name = "treeView1";
 			this.treeView.Size = new System.Drawing.Size(167, 426);
 			this.treeView.TabIndex = 0;
-			this.treeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
+			this.treeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeView1_NodeMouseDoubleClick);
 			// 
 			// contextMenuStrip2
 			// 
@@ -427,14 +427,14 @@
 			this.newToolStripMenuItem1.Name = "newToolStripMenuItem1";
 			this.newToolStripMenuItem1.Size = new System.Drawing.Size(103, 22);
 			this.newToolStripMenuItem1.Text = "New";
-			this.newToolStripMenuItem1.Click += new System.EventHandler(this.newToolStripMenuItem1_Click);
+			this.newToolStripMenuItem1.Click += new System.EventHandler(this.NewToolStripMenuItem1_Click);
 			// 
 			// closeToolStripMenuItem
 			// 
 			this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
 			this.closeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.closeToolStripMenuItem.Text = "Close";
-			this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click_1);
+			this.closeToolStripMenuItem.Click += new System.EventHandler(this.CloseToolStripMenuItem_Click_1);
 			// 
 			// fontSizeToolStripMenuItem
 			// 
@@ -504,7 +504,7 @@
 		private System.Windows.Forms.SplitContainer splitContainer1;
 		private System.Windows.Forms.TreeView treeView;
 		private System.Windows.Forms.ToolStripMenuItem openProjectFolderToolStripMenuItem;
-		private System.Windows.Forms.TabControl tabControl1;
+		private System.Windows.Forms.TabControl tabControl;
 		private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
 		private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem1;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;

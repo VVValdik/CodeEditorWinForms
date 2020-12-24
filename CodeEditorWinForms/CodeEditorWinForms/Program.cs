@@ -16,7 +16,7 @@ namespace CodeEditorWinForms
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new CodeEditor());
+			Application.Run(new CodeEditorForm());
 		}
 	}
 }

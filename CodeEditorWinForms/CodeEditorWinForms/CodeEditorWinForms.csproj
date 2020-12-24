@@ -51,11 +51,15 @@
   <ItemGroup>
     <Compile Include="Autocomplete.cs" />
     <Compile Include="CodeEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CodeEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CodeEditor.Designer.cs">
-      <DependentUpon>CodeEditor.cs</DependentUpon>
+    <Compile Include="CodeEditorForm.Designer.cs">
+      <DependentUpon>CodeEditorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="FileExplorer.cs" />
     <Compile Include="FileUtils.cs" />
     <Compile Include="HTMLPreview.cs">
       <SubType>Form</SubType>
@@ -71,8 +75,8 @@
     <Compile Include="ThemeEditor.Designer.cs">
       <DependentUpon>ThemeEditor.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="CodeEditor.resx">
-      <DependentUpon>CodeEditor.cs</DependentUpon>
+    <EmbeddedResource Include="CodeEditorForm.resx">
+      <DependentUpon>CodeEditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HTMLPreview.resx">
       <DependentUpon>HTMLPreview.cs</DependentUpon>
