@@ -41,7 +41,7 @@ namespace CodeEditorWinForms
 		
 		void AddNewTab(string name)
 		{
-			EditorTabPage newTab = new EditorTabPage(name, tabMenuStrip);
+			EditorTabPage newTab = new EditorTabPage(name, tabMenuStrip, editorStrip);
 
 			tabControl.Controls.Add(newTab);
 			tabControl.SelectTab(tabControl.TabCount - 1);
@@ -70,32 +70,40 @@ namespace CodeEditorWinForms
 			}
 		}
 
-		private void openToolStripMenuItem_Click(object sender, EventArgs e)
+		private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			OpenFileDialog();
 		}
 
-		private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+		private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			try
+			if (File.Exists(tabControl.SelectedTab.Text))
 			{
-				StreamWriter streamWriter = new StreamWriter(this.Text);
-
-				if(!HasTabs())
+				try
 				{
-					return;
+					if (!HasTabs())
+					{
+						return;
+					}
+
+					StreamWriter streamWriter = new StreamWriter(Path.GetFullPath(tabControl.SelectedTab.Text));
+
+					var codeEditor = GetCurrentCodeEditor();
+					streamWriter.Write(codeEditor.Text);
+					streamWriter.Close();
 				}
-				var codeEditor = GetCurrentCodeEditor();
-				streamWriter.Write(codeEditor.Text);
-				streamWriter.Close();
+				catch
+				{
+					MessageBox.Show("Error!");
+				}
 			}
-			catch
+			else
 			{
-				OpenFileDialog();
+				SaveAs();
 			}
 		}
 
-		private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
+		private void SaveAs()
 		{
 			SaveFileDialog saveFileDialog = new SaveFileDialog();
 			saveFileDialog.Filter = FileDialogFilterAny;
@@ -103,11 +111,16 @@ namespace CodeEditorWinForms
 			if (saveFileDialog.ShowDialog() == DialogResult.OK)
 			{
 				StreamWriter streamWriter = new StreamWriter(saveFileDialog.FileName);
-				
+
 				streamWriter.Write(GetCurrentCodeEditor().Text);
 
 				streamWriter.Close();
 			}
+		}
+
+		private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			SaveAs();
 		}
 
 		private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -150,32 +163,10 @@ namespace CodeEditorWinForms
 			codeEditor.Paste();
 		}
 
-		private void BackgroundColorToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			ColorDialog colorDialog = new ColorDialog();
-
-			if (colorDialog.ShowDialog() == DialogResult.OK)
-			{
-				var codeEditor = tabControl.SelectedTab.Controls[0] as FastColoredTextBox;
-				codeEditor.BackColor = colorDialog.Color;
-			}
-		}
-
 		private CodeEditor GetCurrentCodeEditor()
 		{
 			var codeEditor = tabControl.SelectedTab.Controls[0] as CodeEditor;
 			return codeEditor;
-		}
-
-		private void TextColorToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			ColorDialog colorDialog = new ColorDialog();
-
-			if (colorDialog.ShowDialog() == DialogResult.OK)
-			{
-				var codeEditor = tabControl.SelectedTab.Controls[0] as FastColoredTextBox;
-				codeEditor.ForeColor = colorDialog.Color;
-			}
 		}
 
 		private void UndoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -364,11 +355,18 @@ namespace CodeEditorWinForms
 			{
 				return;
 			}
-
+			
 			var codeEditor = GetCurrentCodeEditor();
-			CSharpCompiler.Compile(codeEditor.Text);
+			if (codeEditor.Language == Language.CSharp)
+			{
+				CSharpCompiler.Compile(codeEditor.Text);
+			}
+			else
+			{
+				MessageBox.Show("Not CSharp language!");
+			}
 		}
-
+			
 		void CheckCurrentLanguage(string language)
 		{
 			currentLanguage.Checked = false;

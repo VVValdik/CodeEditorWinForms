@@ -58,7 +58,7 @@
 			this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.runHTMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.runCShaprCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.editorStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.cutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.copyToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -70,7 +70,7 @@
 			this.newToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
-			this.contextMenuStrip1.SuspendLayout();
+			this.editorStrip.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -117,7 +117,7 @@
 			this.openToolStripMenuItem.Name = "openToolStripMenuItem";
 			this.openToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
 			this.openToolStripMenuItem.Text = "Open";
-			this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+			this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
 			// 
 			// saveToolStripMenuItem
 			// 
@@ -125,7 +125,7 @@
 			this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
 			this.saveToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
 			this.saveToolStripMenuItem.Text = "Save";
-			this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+			this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
 			// 
 			// saveAsToolStripMenuItem
 			// 
@@ -339,13 +339,13 @@
 			// 
 			// contextMenuStrip1
 			// 
-			this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.editorStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.selectAllToolStripMenuItem,
             this.cutToolStripMenuItem1,
             this.copyToolStripMenuItem1,
             this.pasteToolStripMenuItem1});
-			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(123, 92);
+			this.editorStrip.Name = "contextMenuStrip1";
+			this.editorStrip.Size = new System.Drawing.Size(123, 92);
 			// 
 			// selectAllToolStripMenuItem
 			// 
@@ -446,7 +446,7 @@
 			this.Text = "CodeEditor";
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
-			this.contextMenuStrip1.ResumeLayout(false);
+			this.editorStrip.ResumeLayout(false);
 			this.splitContainer1.Panel1.ResumeLayout(false);
 			this.splitContainer1.Panel2.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -473,7 +473,7 @@
 		private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem undoToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem redoToolStripMenuItem;
-		private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+		private System.Windows.Forms.ContextMenuStrip editorStrip;
 		private System.Windows.Forms.ToolStripMenuItem selectAllToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem cutToolStripMenuItem1;
 		private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem1;

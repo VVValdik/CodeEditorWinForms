@@ -11,13 +11,13 @@ namespace CodeEditorWinForms
 		{
 			Dock = DockStyle.Fill;
 			ContextMenuStrip = contextMenuStrip;
-			KeyDown += codeEditor_KeyDown;
+			KeyDown += CodeEditor_KeyDown;
 
 			SetAutoCompleteMenu();
 			SetEditorStyle();
 		}
 
-		private void codeEditor_KeyDown(object sender, KeyEventArgs e)
+		private void CodeEditor_KeyDown(object sender, KeyEventArgs e)
 		{
 			// when user press Ctrl + Space
 			if (e.KeyData == (Keys.Control | Keys.Space))

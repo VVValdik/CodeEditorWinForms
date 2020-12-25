@@ -5,10 +5,11 @@ namespace CodeEditorWinForms
 	class EditorTabPage : TabPage
 	{
 		
-		public EditorTabPage(string name, ContextMenuStrip contextMenuStrp)
+		public EditorTabPage(string name, ContextMenuStrip tabMenuStrip, ContextMenuStrip editorStrip)
 		{
 			Text = name;
-			CodeEditor codeEditor = new CodeEditor(contextMenuStrp);
+			ContextMenuStrip = tabMenuStrip;
+			CodeEditor codeEditor = new CodeEditor(editorStrip);
 			Controls.Add(codeEditor);
 		}
 	}
