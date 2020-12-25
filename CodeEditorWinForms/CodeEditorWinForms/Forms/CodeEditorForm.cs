@@ -275,7 +275,8 @@ namespace CodeEditorWinForms
 			currentLanguage.Checked = true;
 
 			SetLanguage(currentLanguage.Text);
-			
+
+			if (!HasTabs()) return;
 			var codeEditor = tabControl.SelectedTab.Controls[0] as FastColoredTextBox;
 			codeEditor.Refresh();
 		}
