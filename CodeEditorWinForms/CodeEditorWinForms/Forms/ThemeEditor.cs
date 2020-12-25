@@ -51,14 +51,20 @@ namespace CodeEditorWinForms
 			}
 		}
 
-		private void backgroundColorBox_Click(object sender, EventArgs e)
+		private void BackgroundColorBox_Click(object sender, EventArgs e)
 		{
 			PickColor(sender, BgColor);
 		}
 
-		private void textColorBox_Click(object sender, EventArgs e)
+		private void TextColorBox_Click(object sender, EventArgs e)
 		{
 			PickColor(sender, TextColor);
+		}
+
+		private void Reset_Click(object sender, EventArgs e)
+		{
+			Settings.SetDefault();
+			InitColors();	
 		}
 	}
 }
